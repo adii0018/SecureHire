@@ -1,0 +1,277 @@
+# 🔐 SecureHire — AI-Powered Real-Time Interview Platform
+
+<div align="center">
+
+![SecureHire Banner](https://img.shields.io/badge/SecureHire-AI%20Interview%20Platform-6C63FF?style=for-the-badge&logo=shield&logoColor=white)
+
+[![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Django](https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white)](https://djangoproject.com/)
+[![WebRTC](https://img.shields.io/badge/WebRTC-333333?style=flat-square&logo=webrtc&logoColor=white)](https://webrtc.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat-square&logo=mongodb&logoColor=white)](https://mongodb.com/)
+[![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)](https://redis.io/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
+**Make online interviews fair, secure, and intelligent — with real-time AI proctoring.**
+
+[🌐 Live Demo](#-live-demo) • [✨ Features](#-features) • [🛠 Tech Stack](#️-tech-stack) • [⚙️ Setup](#️-local-setup) • [🗺 Roadmap](#-roadmap)
+
+</div>
+
+---
+
+## 🌐 Live Demo
+
+| Service | URL |
+|---------|-----|
+| 🖥️ Frontend | [securehire.vercel.app](https://your-frontend-link.vercel.app) |
+| ⚙️ Backend API | [securehire-api.onrender.com](https://your-backend-link.onrender.com) |
+
+---
+
+## 🎯 What is SecureHire?
+
+SecureHire is a **dual-mode interview & meeting platform** that combines:
+
+- ⚡ **WebRTC-based** peer-to-peer real-time communication
+- 🤖 **AI-powered proctoring** with behavioral & visual analysis
+- 📊 **Live dashboards** with risk scoring and violation logs
+
+Whether you're a recruiter running secure 1:1 interviews or hosting scalable group meetings — SecureHire has you covered.
+
+---
+
+## ✨ Features
+
+### 🧑‍💻 Interview Mode (1:1)
+
+#### 🔹 Normal Mode
+- Real-time video & audio via WebRTC
+- Low-latency peer-to-peer communication
+- End-to-end encrypted sessions
+
+#### 🔹 Advanced Mode ⚡ — AI Proctoring
+> Fully customizable — enable/disable each feature individually
+
+| Feature | Description |
+|---------|-------------|
+| 👁️ Eye Tracking | Detects gaze deviation from screen |
+| 🧑‍🤝‍🧑 Multi-Face Detection | Alerts when multiple faces appear |
+| 🎤 Voice Detection | Flags background speech or coaching |
+| 🖥️ Tab Switch Detection | Detects candidate leaving the session tab |
+| 📋 Copy-Paste Detection | Monitors clipboard activity |
+| 📊 Behavior Analysis | Aggregated risk scoring & activity timeline |
+
+---
+
+### 👥 Meeting Mode (1:Many)
+- Group video conferencing with multiple participants
+- In-session text chat & participant management
+- SFU-ready architecture for horizontal scaling (mediasoup)
+
+---
+
+### 🔑 Code-Based Joining System
+
+Every session generates a **unique 6-character alphanumeric code**. Candidates can join via:
+
+- Entering the code directly
+- Clicking a shareable link
+
+```
+https://securehire.app/join/A1B2C3
+```
+
+---
+
+### 📊 Smart Monitoring Dashboard
+
+- 🎥 Live video feeds of all candidates
+- 🚨 Real-time alerts per violation type
+- 📈 Per-candidate risk score (0–100)
+- 📝 Timestamped violation logs
+- 🔔 Configurable alert thresholds
+
+---
+
+## 🧠 System Architecture
+
+```
+┌─────────────────────────────────────────────────┐
+│                  Landing Page                   │
+└───────────────────────┬─────────────────────────┘
+                        │
+               Authentication (JWT / Google OAuth)
+                        │
+              ┌─────────▼──────────┐
+              │     Dashboard      │
+              └──────┬──────┬──────┘
+                     │      │
+              ┌──────▼──┐ ┌─▼───────┐
+              │  Create  │ │  Join   │
+              └──────┬───┘ └───┬─────┘
+                     │         │
+              Select Mode   Enter Code
+                     │         │
+              Generate Code Join Room
+                     │
+        ┌────────────▼──────────────────┐
+        │   Session (WebRTC + Signaling) │
+        │                               │
+        │  ┌────────────────────────┐   │
+        │  │   AI Proctoring Engine │   │
+        │  │  face-api.js / OpenCV  │   │
+        │  └────────────────────────┘   │
+        │                               │
+        │  ┌────────────────────────┐   │
+        │  │   Monitoring Dashboard  │   │
+        │  │   Alerts / Risk Score  │   │
+        │  └────────────────────────┘   │
+        └───────────────────────────────┘
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React (Vite), Tailwind CSS, Axios, React Router |
+| **Backend** | Django, Django REST Framework, Django Channels |
+| **Real-Time** | WebRTC (P2P), mediasoup SFU (optional) |
+| **AI / Detection** | face-api.js, OpenCV.js, TensorFlow.js |
+| **Database** | MongoDB |
+| **Cache & Messaging** | Redis |
+| **Auth** | JWT + Google OAuth 2.0 |
+| **Deployment** | Vercel (Frontend) · Render / AWS (Backend) |
+
+---
+
+## 📁 Project Structure
+
+```
+securehire/
+│
+├── frontend/
+│   ├── pages/            # Route-level page components
+│   ├── components/       # Reusable UI components
+│   ├── webrtc/           # WebRTC connection logic
+│   └── hooks/            # Custom React hooks
+│
+└── backend/
+    ├── apps/             # Django apps (users, sessions, alerts)
+    ├── api/              # REST API endpoints
+    ├── signaling/        # WebSocket signaling server
+    └── models/           # MongoDB models / schemas
+```
+
+---
+
+## ⚙️ Local Setup
+
+### 🔧 Backend
+
+```bash
+# 1. Navigate to backend
+cd backend
+
+# 2. Create and activate virtual environment
+python -m venv venv
+venv\Scripts\activate        # Windows
+# source venv/bin/activate   # macOS/Linux
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Configure environment variables
+copy .env.example .env       # Windows
+# cp .env.example .env       # macOS/Linux
+
+# 5. Run migrations and start server
+python manage.py migrate
+python manage.py runserver
+```
+
+### 💻 Frontend
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+---
+
+## 🔐 Environment Variables
+
+### Frontend `.env`
+
+```env
+VITE_API_URL=http://localhost:8000/api
+VITE_WS_URL=ws://localhost:8000/ws
+VITE_GOOGLE_CLIENT_ID=your_google_client_id
+```
+
+### Backend `.env`
+
+```env
+SECRET_KEY=your_django_secret_key
+DEBUG=True
+MONGODB_URI=your_mongodb_connection_uri
+REDIS_URL=redis://localhost:6379
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+---
+
+## 🗺 Roadmap
+
+- [x] WebRTC 1:1 Interview Mode
+- [x] AI Proctoring Engine (Eye, Face, Tab, Voice)
+- [x] Code-based session joining
+- [x] Risk score dashboard
+- [ ] 🎥 Session recording & playback
+- [ ] 📊 AI-generated candidate report (PDF export)
+- [ ] 🧠 Advanced behavioral timeline analytics
+- [ ] ⏳ Waiting room & lobby system
+- [ ] 📱 Full mobile responsiveness
+- [ ] 🌍 Multi-language support
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 👤 Author
+
+**Aditya Singh Rajput**
+
+- 📧 Email: [opg21139@gmail.com](mailto:opg21139@gmail.com)
+- 💼 GitHub: [@adityasinghrajput](https://github.com/adityasinghrajput)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+Built with ❤️ to make online interviews **fair, secure, and intelligent** 🚀
+
+⭐ **Star this repo if you found it useful!** ⭐
+
+</div>
