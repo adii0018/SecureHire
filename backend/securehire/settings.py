@@ -70,15 +70,22 @@ DATABASES = {
 
 MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/securehire')
 
-# Channels
+# Channels (Redis optional for development)
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [os.getenv('REDIS_URL', 'redis://localhost:6379')],
-        },
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }
+
+# For production with Redis, use:
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [os.getenv('REDIS_URL', 'redis://localhost:6379')],
+#         },
+#     },
+# }
 
 # REST Framework
 REST_FRAMEWORK = {
