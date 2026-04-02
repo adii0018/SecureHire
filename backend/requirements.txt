@@ -1,0 +1,11 @@
+django>=4.2
+djangorestframework
+djangorestframework-simplejwt
+django-channels
+channels-redis
+pymongo
+dnspython
+social-auth-app-django
+django-cors-headers
+python-dotenv
+daphne
