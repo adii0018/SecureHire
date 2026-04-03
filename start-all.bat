@@ -7,8 +7,6 @@ start "SecureHire Backend" cmd /k ^
    if not exist venv (python -m venv venv) && ^
    call venv\Scripts\activate && ^
    pip install -r requirements.txt && ^
-   python manage.py makemigrations auth_app && ^
-   python manage.py migrate && ^
    daphne -b 0.0.0.0 -p 8000 securehire.asgi:application"
 
 timeout /t 3 /nobreak >nul
