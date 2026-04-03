@@ -32,15 +32,22 @@ class SessionManager:
             'createdAt': datetime.utcnow(),
         }
         sessions_collection.insert_one(session)
+        session.pop('_id', None)  # remove ObjectId — not JSON serializable
         return session
 
     @staticmethod
     def get_session(code):
-        return sessions_collection.find_one({'code': code})
+        doc = sessions_collection.find_one({'code': code})
+        if doc:
+            doc.pop('_id', None)
+        return doc
 
     @staticmethod
     def get_user_sessions(host_id):
-        return list(sessions_collection.find({'hostId': host_id}).sort('createdAt', -1))
+        docs = list(sessions_collection.find({'hostId': host_id}).sort('createdAt', -1))
+        for doc in docs:
+            doc.pop('_id', None)
+        return docs
 
     @staticmethod
     def update_session(code, updates):

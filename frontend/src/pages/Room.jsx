@@ -23,6 +23,7 @@ export default function Room() {
   
   const wsRef = useRef(null);
   const pcRef = useRef(null);
+  const localStreamRef = useRef(null);
   const startTimeRef = useRef(Date.now());
 
   const role = location.state?.role || 'host';
@@ -50,6 +51,7 @@ export default function Room() {
         audio: true,
       });
       setLocalStream(stream);
+      localStreamRef.current = stream;
 
       // Initialize WebSocket
       const ws = new WebSocket(`${import.meta.env.VITE_WS_URL}/session/${code}/`);
@@ -139,9 +141,9 @@ export default function Room() {
     };
 
     // Add local tracks
-    if (localStream) {
-      localStream.getTracks().forEach(track => {
-        pc.addTrack(track, localStream);
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach(track => {
+        pc.addTrack(track, localStreamRef.current);
       });
     }
 
@@ -221,8 +223,8 @@ export default function Room() {
   };
 
   const cleanup = () => {
-    if (localStream) {
-      localStream.getTracks().forEach(track => track.stop());
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach(track => track.stop());
     }
     if (pcRef.current) {
       pcRef.current.close();
