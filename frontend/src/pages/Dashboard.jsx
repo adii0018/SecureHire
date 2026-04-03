@@ -6,6 +6,7 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import useAuth from '../hooks/useAuth';
 import api from '../api/axios';
+import { Lock, LayoutDashboard, Video, BarChart2, Settings, Plus, Link, AlertCircle } from 'lucide-react';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -45,8 +46,8 @@ export default function Dashboard() {
           display: 'flex',
           flexDirection: 'column',
         }}>
-          <div style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '32px', color: theme.text }}>
-            🔐 SecureHire
+          <div style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '32px', color: theme.text, display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Lock size={18} color={theme.accent} /> SecureHire
           </div>
 
           <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -58,8 +59,11 @@ export default function Dashboard() {
               fontWeight: 600,
               fontSize: '0.95rem',
               cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
             }}>
-              📊 Dashboard
+              <LayoutDashboard size={16} /> Dashboard
             </div>
             <div style={{
               padding: '12px 16px',
@@ -67,8 +71,11 @@ export default function Dashboard() {
               color: theme.muted,
               fontSize: '0.95rem',
               cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
             }}>
-              📹 My Sessions
+              <Video size={16} /> My Sessions
             </div>
             <div style={{
               padding: '12px 16px',
@@ -76,8 +83,11 @@ export default function Dashboard() {
               color: theme.muted,
               fontSize: '0.95rem',
               cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
             }}>
-              📈 Analytics
+              <BarChart2 size={16} /> Analytics
             </div>
             <div style={{
               padding: '12px 16px',
@@ -85,8 +95,11 @@ export default function Dashboard() {
               color: theme.muted,
               fontSize: '0.95rem',
               cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
             }}>
-              ⚙️ Settings
+              <Settings size={16} /> Settings
             </div>
           </nav>
 
@@ -153,10 +166,9 @@ export default function Dashboard() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '1.8rem',
                   marginBottom: '16px',
                 }}>
-                  ➕
+                  <Plus size={28} color={theme.accent} />
                 </div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: theme.text, marginBottom: '8px' }}>
                   Create Session
@@ -177,10 +189,9 @@ export default function Dashboard() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '1.8rem',
                   marginBottom: '16px',
                 }}>
-                  🔗
+                  <Link size={28} color="#79c0ff" />
                 </div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: theme.text, marginBottom: '8px' }}>
                   Join Session
@@ -222,7 +233,9 @@ export default function Dashboard() {
 
               {sessions.length === 0 ? (
                 <Card hoverable={false} style={{ padding: '48px', textAlign: 'center' }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '16px' }}>📹</div>
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+                    <Video size={48} color={theme.muted} />
+                  </div>
                   <p style={{ fontSize: '1rem', color: theme.muted }}>
                     No sessions yet. Create your first session to get started!
                   </p>

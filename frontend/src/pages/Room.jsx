@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import RiskGauge from '../components/RiskGauge';
 import AlertFeed from '../components/AlertFeed';
 import VideoTile from '../components/VideoTile';
+import { MicOff, Mic, Video, VideoOff } from 'lucide-react';
 
 export default function Room() {
   const { code } = useParams();
@@ -336,16 +337,16 @@ export default function Room() {
             <Button
               variant={isMuted ? 'primary' : 'outline'}
               onClick={toggleMute}
-              style={{ minWidth: '120px' }}
+              style={{ minWidth: '120px', display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}
             >
-              {isMuted ? '🔇 Unmute' : '🎤 Mute'}
+              {isMuted ? <><MicOff size={16} /> Unmute</> : <><Mic size={16} /> Mute</>}
             </Button>
             <Button
               variant={isVideoOff ? 'primary' : 'outline'}
               onClick={toggleVideo}
-              style={{ minWidth: '120px' }}
+              style={{ minWidth: '120px', display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}
             >
-              {isVideoOff ? '📹 Start Video' : '📹 Stop Video'}
+              {isVideoOff ? <><Video size={16} /> Start Video</> : <><VideoOff size={16} /> Stop Video</>}
             </Button>
             <Button
               variant="outline"

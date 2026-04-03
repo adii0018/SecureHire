@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import CodeBlock from '../components/CodeBlock';
 import useScrollReveal from '../hooks/useScrollReveal';
+import { Eye, Users, Mic, Monitor, Clipboard, BarChart2, Lock, Video } from 'lucide-react';
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -18,12 +19,12 @@ export default function Landing() {
   const ctaRef = useScrollReveal();
 
   const features = [
-    { icon: '👁️', title: 'Eye Tracking', desc: 'Flags gaze deviation from screen in real time' },
-    { icon: '🧑‍🤝‍🧑', title: 'Multi-Face Detection', desc: 'Instantly alerts when extra faces appear' },
-    { icon: '🎤', title: 'Voice Analysis', desc: 'Detects background speech or coaching audio' },
-    { icon: '🖥️', title: 'Tab Switch Detection', desc: 'Monitors if candidate leaves the session' },
-    { icon: '📋', title: 'Copy-Paste Guard', desc: 'Tracks clipboard activity during the session' },
-    { icon: '📊', title: 'Behavior Analytics', desc: 'Aggregated risk score with full timeline' },
+    { icon: Eye, title: 'Eye Tracking', desc: 'Flags gaze deviation from screen in real time' },
+    { icon: Users, title: 'Multi-Face Detection', desc: 'Instantly alerts when extra faces appear' },
+    { icon: Mic, title: 'Voice Analysis', desc: 'Detects background speech or coaching audio' },
+    { icon: Monitor, title: 'Tab Switch Detection', desc: 'Monitors if candidate leaves the session' },
+    { icon: Clipboard, title: 'Copy-Paste Guard', desc: 'Tracks clipboard activity during the session' },
+    { icon: BarChart2, title: 'Behavior Analytics', desc: 'Aggregated risk score with full timeline' },
   ];
 
   return (
@@ -67,8 +68,8 @@ export default function Landing() {
           <Card style={{ marginTop: '64px', padding: '32px', maxWidth: '900px', margin: '64px auto 0' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', marginBottom: '24px' }}>
               <div style={{ background: theme.bg, padding: '16px', borderRadius: '8px', border: `1px solid ${theme.border}` }}>
-                <div style={{ width: '100%', height: '180px', background: theme.subtleBorder, borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: theme.muted }}>
-                  📹 Candidate Video
+                <div style={{ width: '100%', height: '180px', background: theme.subtleBorder, borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: theme.muted, gap: '8px' }}>
+                  <Video size={18} /> Candidate Video
                 </div>
               </div>
               <div style={{ background: theme.bg, padding: '16px', borderRadius: '8px', border: `1px solid ${theme.border}` }}>
@@ -135,10 +136,9 @@ export default function Landing() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '1.5rem',
                   marginBottom: '16px',
                 }}>
-                  {feature.icon}
+                  <feature.icon size={22} color={theme.accent} />
                 </div>
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '8px', color: theme.text }}>{feature.title}</h3>
                 <p style={{ fontSize: '0.95rem', color: theme.muted, lineHeight: 1.6 }}>{feature.desc}</p>
@@ -235,7 +235,9 @@ export default function Landing() {
         }}>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '48px', marginBottom: '48px' }}>
             <div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '12px' }}>🔐 SecureHire</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Lock size={18} color={theme.accent} /> SecureHire
+              </div>
               <p style={{ fontSize: '0.9rem', color: theme.muted, lineHeight: 1.6 }}>
                 AI-powered interview security platform with real-time proctoring and WebRTC video.
               </p>

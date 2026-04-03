@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import VideoTile from '../components/VideoTile';
 import api from '../api/axios';
+import { Users } from 'lucide-react';
 
 export default function Monitor() {
   const { code } = useParams();
@@ -100,7 +101,9 @@ export default function Monitor() {
             
             {participants.length === 0 ? (
               <Card hoverable={false} style={{ padding: '64px', textAlign: 'center' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '16px' }}>👥</div>
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+                  <Users size={48} color={theme.muted} />
+                </div>
                 <p style={{ color: theme.muted }}>No participants have joined yet</p>
               </Card>
             ) : (
