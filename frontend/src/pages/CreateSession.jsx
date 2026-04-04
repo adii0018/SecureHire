@@ -6,6 +6,7 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import PillBadge from '../components/PillBadge';
 import api from '../api/axios';
+import { Code2, Users, CheckCircle } from 'lucide-react';
 
 export default function CreateSession() {
   const navigate = useNavigate();
@@ -26,7 +27,6 @@ export default function CreateSession() {
   const handleModeSelect = (selectedMode) => {
     setMode(selectedMode);
     if (selectedMode === 'meeting') {
-      // Skip config for meeting mode
       createSession(selectedMode, {});
     } else {
       setStep(2);
@@ -104,10 +104,9 @@ export default function CreateSession() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '2rem',
                     marginBottom: '16px',
                   }}>
-                    🧑‍💻
+                    <Code2 size={32} color={theme.accent} />
                   </div>
                   <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: theme.text, marginBottom: '8px' }}>
                     Interview Mode (1:1)
@@ -127,10 +126,9 @@ export default function CreateSession() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '2rem',
                     marginBottom: '16px',
                   }}>
-                    👥
+                    <Users size={32} color="#79c0ff" />
                   </div>
                   <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: theme.text, marginBottom: '8px' }}>
                     Meeting Mode (1:Many)
@@ -286,7 +284,9 @@ export default function CreateSession() {
           {step === 3 && (
             <div>
               <div style={{ marginBottom: '32px', textAlign: 'center' }}>
-                <div style={{ fontSize: '4rem', marginBottom: '16px' }}>✅</div>
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+                <CheckCircle size={64} color={theme.accent} />
+              </div>
                 <PillBadge>Session Created</PillBadge>
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 700, color: theme.text, marginTop: '16px' }}>
                   Your session is ready!
@@ -359,7 +359,7 @@ export default function CreateSession() {
                 <Button variant="outline" onClick={() => navigate('/dashboard')}>
                   Back to Dashboard
                 </Button>
-                <Button onClick={() => navigate(`/room/${sessionCode}`)} style={{ flex: 1 }}>
+                <Button onClick={() => navigate(`/room/${sessionCode}`, { state: { name: 'Host', role: 'host' } })} style={{ flex: 1 }}>
                   Start Session
                 </Button>
               </div>

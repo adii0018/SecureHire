@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -17,11 +18,11 @@ export default function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/create" element={<CreateSession />} />
-          <Route path="/room/:code" element={<Room />} />
           <Route path="/join/:code" element={<Join />} />
-          <Route path="/monitor/:code" element={<Monitor />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/create" element={<ProtectedRoute><CreateSession /></ProtectedRoute>} />
+          <Route path="/room/:code" element={<Room />} />
+          <Route path="/monitor/:code" element={<ProtectedRoute><Monitor /></ProtectedRoute>} />
         </Routes>
       </Router>
     </AuthProvider>

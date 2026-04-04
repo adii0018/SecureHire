@@ -5,6 +5,7 @@ import StarfieldCanvas from '../components/StarfieldCanvas';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import api from '../api/axios';
+import { Lock } from 'lucide-react';
 
 export default function Join() {
   const { code } = useParams();
@@ -64,7 +65,9 @@ export default function Join() {
         padding: '48px',
       }}>
         <Card style={{ maxWidth: '500px', width: '100%', padding: '48px', textAlign: 'center' }} hoverable={false}>
-          <div style={{ fontSize: '3rem', marginBottom: '16px' }}>🔐</div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+            <Lock size={48} color={theme.accent} />
+          </div>
           
           <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: theme.text, marginBottom: '8px' }}>
             You're invited to join

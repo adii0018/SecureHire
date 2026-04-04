@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { theme, fonts } from '../theme';
 import Button from './Button';
+import { Lock } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -47,7 +48,8 @@ export default function Navbar() {
           gap: '8px',
         }}
       >
-        🔐 SecureHire
+        <Lock size={20} color={theme.accent} />
+        SecureHire
       </div>
 
       {/* Nav Links */}

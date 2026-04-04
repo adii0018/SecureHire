@@ -6,6 +6,7 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import GoogleAuthButton from '../components/GoogleAuthButton';
 import useAuth from '../hooks/useAuth';
+import { Lock } from 'lucide-react';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -69,7 +70,9 @@ export default function Register() {
       }}>
         <Card style={{ maxWidth: '440px', width: '100%', padding: '48px' }} hoverable={false}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '8px' }}>🔐</div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+              <Lock size={32} color={theme.accent} />
+            </div>
             <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: theme.text, marginBottom: '8px' }}>
               Create your account
             </h1>
