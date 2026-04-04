@@ -9,3 +9,4 @@ social-auth-app-django
 django-cors-headers
 python-dotenv
 daphne
+google-auth>=2.0.0
