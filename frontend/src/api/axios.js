@@ -22,13 +22,22 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Don't retry refresh endpoint itself to avoid infinite loop
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url?.includes('/auth/token/refresh/') &&
+      !originalRequest.url?.includes('/auth/login/') &&
+      !originalRequest.url?.includes('/auth/register/')
+    ) {
       originalRequest._retry = true;
 
       try {
         const refreshToken = localStorage.getItem('refresh_token');
+        if (!refreshToken) throw new Error('No refresh token');
+
         const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}/auth/token/refresh/`,
+          `${import.meta.env.VITE_API_URL || 'http://localhost:8000/api'}/auth/token/refresh/`,
           { refresh: refreshToken }
         );
 
@@ -37,11 +46,10 @@ api.interceptors.response.use(
 
         originalRequest.headers.Authorization = `Bearer ${access}`;
         return api(originalRequest);
-      } catch (refreshError) {
+      } catch {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         window.location.href = '/login';
-        return Promise.reject(refreshError);
       }
     }
 

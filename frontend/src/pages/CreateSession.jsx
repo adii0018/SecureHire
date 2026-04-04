@@ -27,7 +27,6 @@ export default function CreateSession() {
   const handleModeSelect = (selectedMode) => {
     setMode(selectedMode);
     if (selectedMode === 'meeting') {
-      // Skip config for meeting mode
       createSession(selectedMode, {});
     } else {
       setStep(2);
@@ -360,7 +359,7 @@ export default function CreateSession() {
                 <Button variant="outline" onClick={() => navigate('/dashboard')}>
                   Back to Dashboard
                 </Button>
-                <Button onClick={() => navigate(`/room/${sessionCode}`)} style={{ flex: 1 }}>
+                <Button onClick={() => navigate(`/room/${sessionCode}`, { state: { name: 'Host', role: 'host' } })} style={{ flex: 1 }}>
                   Start Session
                 </Button>
               </div>

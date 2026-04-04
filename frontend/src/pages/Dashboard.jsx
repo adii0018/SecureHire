@@ -121,11 +121,11 @@ export default function Dashboard() {
               color: '#fff',
               fontWeight: 700,
             }}>
-              {user?.name?.charAt(0).toUpperCase()}
+              {user?.first_name?.charAt(0).toUpperCase() || user?.email?.charAt(0).toUpperCase()}
             </div>
             <div style={{ flex: 1, overflow: 'hidden' }}>
               <div style={{ fontSize: '0.9rem', fontWeight: 600, color: theme.text, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {user?.name}
+                {user?.first_name} {user?.last_name}
               </div>
               <button
                 onClick={logout}
@@ -148,7 +148,7 @@ export default function Dashboard() {
         <main style={{ flex: 1, padding: '48px' }}>
           <div style={{ maxWidth: '1200px' }}>
             <h1 style={{ fontSize: '2rem', fontWeight: 800, color: theme.text, marginBottom: '8px' }}>
-              Welcome back, {user?.name?.split(' ')[0]} 👋
+              Welcome back, {user?.first_name || user?.email?.split('@')[0]} 👋
             </h1>
             <p style={{ fontSize: '1rem', color: theme.muted, marginBottom: '48px' }}>
               What do you want to do today?

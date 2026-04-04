@@ -21,7 +21,7 @@ class UserManager:
 
         hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         user = {
-            'email': email,
+            'email': email.lower().strip(),
             'first_name': first_name,
             'last_name': last_name,
             'password': hashed.decode('utf-8'),
@@ -36,7 +36,7 @@ class UserManager:
 
     @staticmethod
     def get_by_email(email):
-        return users_collection.find_one({'email': email})
+        return users_collection.find_one({'email': email.lower().strip()})
 
     @staticmethod
     def get_by_id(user_id):
@@ -47,7 +47,10 @@ class UserManager:
 
     @staticmethod
     def check_password(user_doc, password):
-        return bcrypt.checkpw(password.encode('utf-8'), user_doc['password'].encode('utf-8'))
+        stored = user_doc.get('password')
+        if not stored:
+            return False
+        return bcrypt.checkpw(password.encode('utf-8'), stored.encode('utf-8'))
 
     @staticmethod
     def format_user(user_doc):
