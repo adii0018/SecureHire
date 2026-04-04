@@ -8,7 +8,9 @@ from .serializers import SessionSerializer
 
 
 def _get_user_id(request):
-    return request.auth.get('user_id') if request.auth else None
+    if request.user and request.user.is_authenticated:
+        return request.user.id
+    return None
 
 
 @api_view(['POST'])

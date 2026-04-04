@@ -1,14 +1,19 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
-from pymongo import MongoClient
-from django.conf import settings
 from datetime import datetime
 
-client = MongoClient(settings.MONGODB_URI)
-db = client.get_database()
-sessions_col = db['sessions']
-alerts_col = db['alerts']
+# Lazy DB access — initialized on first use to avoid settings-not-configured error
+_db = None
+
+def _get_db():
+    global _db
+    if _db is None:
+        from pymongo import MongoClient
+        from django.conf import settings
+        client = MongoClient(settings.MONGODB_URI)
+        _db = client.get_database()
+    return _db
 
 # In-memory participant registry per session
 # { session_code: { channel_name: { name, role } } }
@@ -125,15 +130,13 @@ class SignalingConsumer(AsyncWebsocketConsumer):
                 'payload': event['payload'],
             }))
 
-    # ── DB helpers ──────────────────────────────────────────────
-
     @database_sync_to_async
     def _get_session(self, code):
-        return sessions_col.find_one({'code': code})
+        return _get_db()['sessions'].find_one({'code': code})
 
     @database_sync_to_async
     def _update_session_active(self):
-        sessions_col.update_one(
+        _get_db()['sessions'].update_one(
             {'code': self.session_code, 'status': 'waiting'},
             {'$set': {'status': 'active', 'startedAt': datetime.utcnow()}},
         )
@@ -141,14 +144,14 @@ class SignalingConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def _sync_participants_to_db(self):
         participants = list(_participants.get(self.session_code, {}).values())
-        sessions_col.update_one(
+        _get_db()['sessions'].update_one(
             {'code': self.session_code},
             {'$set': {'participants': participants}},
         )
 
     @database_sync_to_async
     def _save_alert(self, alert_type, risk_delta, metadata):
-        alerts_col.insert_one({
+        _get_db()['alerts'].insert_one({
             'sessionCode': self.session_code,
             'participantId': self.participant_info.get('name', ''),
             'alertType': alert_type,

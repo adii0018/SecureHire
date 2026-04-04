@@ -100,7 +100,7 @@ def token_refresh(request):
 @permission_classes([IsAuthenticated])
 def get_user(request):
     try:
-        user_id = request.auth.get('user_id') if request.auth else None
+        user_id = request.user.id if request.user and request.user.is_authenticated else None
         if not user_id:
             return Response({'message': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
 
